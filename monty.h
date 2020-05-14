@@ -40,9 +40,12 @@ void op_compare(stack_t **st, unsigned int line, char *command,
 stack_t push(stack_t **stack, unsigned int line_number);
 stack_t pall(stack_t **stack, unsigned int line_number);
 stack_t pint(stack_t **stack, unsigned int line_number);
-stack_t pop(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
 stack_t swap(stack_t **stack, unsigned int line_number);
 stack_t sub(stack_t **stack, unsigned int line_number);
 stack_t mul(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
 #endif /* GRANDPARENT_H */
 
