@@ -21,7 +21,7 @@ int number_node(char *token, unsigned int line_number)
 	}
 	for (i = 0; found[i]; i++)
 	{
-		if (isdigit(found[i]) == 0)
+		if (isdigit(found[i]) == 0 && found[i] != '-')
 		{
 			ERROR_MANAGE = -1;
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);

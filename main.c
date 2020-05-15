@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 		if (excute(&stack, lines, buffer, instruct, monty_file) == 1)
 		{
 			free(buffer);
-               free_dlist(stack);
+			free_dlist(stack);
 			fclose(monty_file);
 			exit(EXIT_FAILURE);
 		}
