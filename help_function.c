@@ -61,14 +61,16 @@ int excute(stack_t **st, unsigned int line, char *command,
 			{
 				instruct[i].f(st, line);
 				if (strcmp(instruct[i].opcode, "push") == 0)
+				{
 					num = number_node(number, line);
+					(*st)->n = num;
+				}
 
 				if (ERROR_MANAGE == -1)
 				{
 					free(number), free(command), free_dlist(*st);
 					fclose(monty_file), exit(EXIT_FAILURE);
 				}
-				(*st)->n = num;
 			}
 			free(number);
 			return (0);
