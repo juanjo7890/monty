@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 				    {"add", add}, {"sub", sub}, {"div", NULL}, {NULL, NULL}};
 	if (argc != 2)
 	{
-		dprintf(2, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	monty_file = fopen(argv[1], "r");
