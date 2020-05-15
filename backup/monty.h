@@ -1,15 +1,11 @@
 #ifndef GRANDPARENT_H
 #define GRANDPARENT_H
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
-
-
-/* Variable */
-extern int ERROR_MANAGE;
-
+/* This is for macros */
+#define EXIT_ERROR 1
+#define EXIT_FAILIURE 1
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -21,9 +17,9 @@ extern int ERROR_MANAGE;
  */
 typedef struct stack_s
 {
-  int n;
-  struct stack_s *prev;
-  struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 /**
  * struct instruction_s - opcode and its function
@@ -35,23 +31,21 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-  char *opcode;
-  void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-int excute(stack_t **st, unsigned int line, char *command,
-	   instruction_t instruct[], FILE *monty_file);
-
-void pall(stack_t **stack, unsigned int line_number);
-void push(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-int number_node(char *token, unsigned int line_number);
-void free_dlist(stack_t *stack);
-void nop(stack_t **stack, unsigned int line_number);
-void sub(stack_t **stack, unsigned int line_number);
+void op_compare(stack_t **st, unsigned int line, char *command,
+		instruction_t instruct[]);
+/* This is the instruction */
+stack_t push(stack_t **stack, unsigned int line_number);
+stack_t pall(stack_t **stack, unsigned int line_number);
+stack_t pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-
 stack_t swap(stack_t **stack, unsigned int line_number);
+stack_t sub(stack_t **stack, unsigned int line_number);
 stack_t mul(stack_t **stack, unsigned int line_number);
-
+void nop(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
 #endif /* GRANDPARENT_H */
+

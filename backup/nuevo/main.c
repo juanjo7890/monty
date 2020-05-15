@@ -1,4 +1,6 @@
 #include "monty.h"
+#include <ctype.h>
+
 int ERROR_MANAGE = 0;
 
 /**

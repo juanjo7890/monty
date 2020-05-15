@@ -1,56 +1,50 @@
 #include "monty.h"
+int ERROR_MANAGE = 0;
 
-extern line = 0;
+/**
+ * main - is the main functioj
+ * @argc: int of how many arguments
+ * @argv: is the arguments passed into the file
+ *
+ * Return: if fails throught errors
+ */
 int main(int argc, char *argv[])
 {
-	char buffer[1024];
+	size_t size = 0;
 	FILE *monty_file;
-	instruction_t instruct[] = {{"push", push}, {"mul", NULL},
-				    {"pall", pall}, {"pop", pop}, {"pint", pint}, {"swap", swap},
-				    {"add", pint}, {"sub", NULL}, {"div", NULL}, {"NULL", NULL}};
-	stack_t *st = NULL;
+	char *buffer = NULL;
+	int lines = 1;
+	stack_t *stack = NULL;
+	instruction_t instruct[] = {{"push", push}, {"pall", pall},
+		{"nop", nop}, {"pop", pop}, {"pint", pint}, {"swap", NULL},
+		{"add", add}, {"sub", sub}, {"div", NULL}, {NULL, NULL}};
 
 	if (argc != 2)
 	{
 		printf("USAGE: monty file\n");
-		exit(EXIT_ERROR);
+		exit(EXIT_FAILURE);
 	}
-	monty_file = fopen(argv[1], "r")
+	monty_file = fopen(argv[1], "r");
 	if (monty_file == NULL)
 	{
 		printf("ERROR: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILIURE);
+		exit(EXIT_FAILURE);
 	}
-/* Indicate the end of the file give 0 if didn't find the end of the file */
-	while (!feof(monty_file))
+
+	while (getline(&buffer, &size, monty_file) > 0)
 	{
-/* the 1024 is the number the file is goint to read */
-		if (fgets(buffer, 1024, monty_file) != NULL)
-			op_compare(&st, line, buffer, instruct);
+		if (excute(&stack, lines, buffer, instruct, monty_file) < 0)
+		{
+			free(buffer);
+			free_dlist(stack);
+			fclose(monty_file);
+			exit(EXIT_FAILURE);
+		}
+		lines++;
 	}
+
+	free_dlist(stack);
+	free(buffer);
 	fclose(monty_file);
 	return (0);
-}
-void op_compare(stack_t **st, unsigned int line, char *command,
-		instruction_t instruct[])
-{
-	int i = 0;
-	char *opcode = NULL;
-	stack_t *new_node = NULL;
-
-	opcode = strtok(command, "\t ");
-
-	while (instruct[i].opcode != NULL)
-	{
-		if (strcmp(opcode, instruct[i].opcode) == 0)
-		{
-			new_node = opcodes[i].f(st, line);
-			if (strcmp(instruct[i].opcode, "push"))
-				new_node->n = strtok(opcode, NULL);
-			return;
-		}
-		i++;
-	}
-	printf("L%u: Unknown instruction %s\n", line, opcode);
-	exit(EXIT_FAILURE);
 }

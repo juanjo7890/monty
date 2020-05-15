@@ -43,14 +43,17 @@ typedef struct instruction_s
 int excute(stack_t **st, unsigned int line, char *command,
 	   instruction_t instruct[], FILE *monty_file);
 
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+int number_node(char *token, unsigned int line_number);
+void free_dlist(stack_t *stack);
+void nop(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
 
-
-stack_t push(stack_t **stack, unsigned int line_number);
-stack_t pint(stack_t **stack, unsigned int line_number);
-stack_t pop(stack_t **stack, unsigned int line_number);
 stack_t swap(stack_t **stack, unsigned int line_number);
-stack_t sub(stack_t **stack, unsigned int line_number);
 stack_t mul(stack_t **stack, unsigned int line_number);
 
 #endif /* GRANDPARENT_H */
