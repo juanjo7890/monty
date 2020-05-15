@@ -53,5 +53,7 @@ void add(stack_t **stack, unsigned int line_number);
 
 stack_t swap(stack_t **stack, unsigned int line_number);
 stack_t mul(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+
 
 #endif /* GRANDPARENT_H */
