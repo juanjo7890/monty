@@ -31,7 +31,7 @@ void pint(stack_t **stack, unsigned int line_number)
 
 	{
 		ERROR_MANAGE = -1;
-		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		printf("L%d: can't pint, stack empty\n", line_number);
 		return;
 	}
 	printf("%d\n", (*stack)->n);
