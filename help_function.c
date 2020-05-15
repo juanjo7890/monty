@@ -89,9 +89,9 @@ int excute(stack_t **st, unsigned int line, char *command,
 			return (0);
 		}
 	}
-	free_dlist(*st), free(number);
+	free(number);
 	fprintf(stderr, "L%u: Unknown instruction %s\n", line, word);
-	return (-1);
+	return (1);
 }
 /**
  *nop - does nothing
